@@ -9,6 +9,28 @@ from sample_config import Config
 
 LOCATION = "./downloades"
 
+START_BTN = ikb(
+    [
+        [
+            ("💬 Updates Channel", "t.me/damiensoukara", "url"),
+            ("🗣 Support Group", "t.me/damienhelp", "url"),
+        ],
+        [
+            ("👾 About", "about"),
+            ("📚 Help", "help"),
+            ("❌", "close"),
+        ],
+        [
+            (
+                "🔗 Source Code",
+                "https://github.com/AmineSoukara/PyLyricsBot/fork",
+                "url",
+            ),
+            ("👨‍💻 Developer", "https://bio.link/aminesoukara", "url"),
+        ],
+    ]
+)
+
 STARTPIC = "https://telegra.ph/file/3f46a4a1ffecf0a641a02.jpg"
 
 START_TEXT ="Hey, I'm Vimeo downloader bot 😜 \n\nI can download vimeo video links and upload to Telegram 🥰 \n\nSend me a vimeo video link to start download 😎"
@@ -26,6 +48,7 @@ async def start(c, m):
     await m.reply_photo(
         photo=STARTPIC,
         caption=START_TEXT,
+        reply_markup=START_BTN,
     )
 
 # vimeo download
