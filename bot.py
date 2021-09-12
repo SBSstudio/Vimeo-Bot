@@ -26,7 +26,6 @@ async def start(c, m):
     await m.reply_photo(
         photo=STARTPIC,
         caption=START_TEXT,
-       reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔗 Source Code", url="https://github.com/dihanofficial/Vimeo-Bot")]]))
     )
 
 # vimeo download
