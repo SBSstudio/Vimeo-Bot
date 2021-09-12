@@ -7,7 +7,7 @@ from vimeo_downloader import Vimeo
 from sample_config import Config
 
 
-LOCATION = "./"
+LOCATION = "./downloades"
 
 # logging
 bot = Client(
