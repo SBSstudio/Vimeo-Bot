@@ -9,6 +9,9 @@ from sample_config import Config
 
 LOCATION = "./downloades"
 
+STARTPIC = "https://telegra.ph/file/3f46a4a1ffecf0a641a02.jpg"
+
+START_TEXT ="Hey, I'm Vimeo downloader bot 😜 \n\nI can download vimeo video links and upload to Telegram 🥰 \n\nSend me a vimeo video link to start download 😎"
 # logging
 bot = Client(
    "Vimeo",
@@ -18,13 +21,13 @@ bot = Client(
 )
 
 # start message
-@bot.on_message(filters.command("start") & filters.private)
-async def start(_, message):
-   user = message.from_user.mention
-   await message.reply_text(f"""Hey {user}, I'm Vimeo downloader bot 😜
-I can download vimeo video links and upload to Telegram 🥰
-Send me a vimeo video link to start download 😎""",
+@bot.on_message(filters.private & filters.command(["start"]))
+async def start(c, m):
+    await m.reply_photo(
+        photo=STARTPIC,
+        caption=START_TEXT,
        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔗 Source Code", url="https://github.com/dihanofficial/Vimeo-Bot")]]))
+    )
 
 # vimeo download
 @bot.on_message(filters.regex(pattern="https://vimeo.com/") & filters.private)
