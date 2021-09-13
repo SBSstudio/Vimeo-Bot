@@ -35,10 +35,29 @@ START_BTN = ikb(
     ]
 )
 
+HELP_BTN = ikb(
+    [
+        [
+            ("💬 Updates Channel", "t.me/damiensoukara", "url"),
+            ("🗣 Support Group", "t.me/damienhelp", "url"),
+        ],
+        [
+            ("👾 About", "about"),
+            ("📚 Help", "help"),
+            ("❌", "close"),
+        ],
+    ]
+)
+
 STARTPIC = "https://telegra.ph/file/3f46a4a1ffecf0a641a02.jpg"
 
 START_TEXT ="Hey, I'm Vimeo downloader bot 😜 \n\nI can download vimeo video links and upload to Telegram 🥰 \n\nSend me a vimeo video link to start download 😎"
+
+HELP_TEXT ="Hey,"
+
+HELPPIC = "https://telegra.ph/file/5db9ed27322137240ee4b.jpg"
 # logging
+
 bot = Client(
    "Vimeo",
    api_id=Config.API_ID,
@@ -55,7 +74,15 @@ async def start(c, m):
         reply_markup=START_BTN,
     )
 
-# vimeo download
+ @bot.on_message(filters.private & filters.command(["help"]))
+async def start(c, m):
+    await m.reply_photo(
+        photo=HELPPIC,
+        caption=HELP_TEXT,
+        reply_markup=HELP_BTN,
+    )   
+
+ # vimeo download
 @bot.on_message(filters.regex(pattern="https://vimeo.com/") & filters.private)
 async def vimeo(_, message):
     input = message.text
