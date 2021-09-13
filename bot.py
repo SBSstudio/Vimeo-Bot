@@ -74,13 +74,23 @@ async def start(c, m):
         reply_markup=START_BTN,
     )
 
-@bot.on_message(filters.private & filters.command(["help"]))
-async def start(c, m):
-    await m.reply_photo(
+@bot.on_callback_query()
+async def cdata(c, q):
+
+    data = q.data
+    # userid = q.from_user.id
+    pwait = "hi"
+    if data == "help":
+        await q.answer(pwait)
+        await q.message.edit_photo(
         photo=HELPPIC,
         caption=HELP_TEXT,
         reply_markup=HELP_BTN,
-    )   
+    )
+    elif data == "close":
+        await q.message.delete(True)
+        try:
+            await q.message.reply_to_message.delete(True)
 
  # vimeo download
 @bot.on_message(filters.regex(pattern="https://vimeo.com/") & filters.private)
