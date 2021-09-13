@@ -66,13 +66,7 @@ bot = Client(
 )
 
 # start message
-@bot.on_message(filters.private & filters.command(["start"]))
-async def start(c, m):
-    await m.reply_photo(
-        photo=STARTPIC,
-        caption=START_TEXT,
-        reply_markup=START_BTN,
-    )
+
 
 @bot.on_callback_query()
 async def cdata(c, q):
@@ -92,27 +86,14 @@ async def cdata(c, q):
         try:
             await q.message.reply_to_message.delete(True)
 
- # vimeo download
-@bot.on_message(filters.regex(pattern="https://vimeo.com/") & filters.private)
-async def vimeo(_, message):
-    input = message.text
-    user = message.from_user.mention
-    msg = await message.reply_text("📥 `Downloading...`")
-    try:
-        v = Vimeo(input)
-        stream = v.streams
-        stream[-1].download(download_directory=LOCATION,
-                        filename="dihanofficial-vimeo.mp4")
-        file = "./dihanofficial-vimeo.mp4"
-        await msg.edit("📤 `Uploading...`")
-        cap = f" `Uploaded By :` {user} \n `Bot By:` @DihanOfficial"    
-        await bot.send_video(message.chat.id, video=file, caption=cap)
-        await msg.delete()
-        os.remove(file)
-    except Exception as e:
-        print(str(e))
-        await msg.edit("❌ `Error.`")
-        return
+@bot.on_message(filters.private & filters.command(["start"]))
+async def start(c, m):
+    await m.reply_photo(
+        photo=STARTPIC,
+        caption=START_TEXT,
+        reply_markup=START_BTN,
+    )
+
 
 bot.start()
 idle()
