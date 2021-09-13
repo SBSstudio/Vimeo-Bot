@@ -74,7 +74,7 @@ async def start(c, m):
         reply_markup=START_BTN,
     )
 
- @bot.on_message(filters.private & filters.command(["help"]))
+@bot.on_message(filters.private & filters.command(["help"]))
 async def start(c, m):
     await m.reply_photo(
         photo=HELPPIC,
