@@ -76,7 +76,7 @@ async def cdata(c, q):
     pwait = "hi"
     if data == "help":
         await q.answer(pwait)
-        await q.message.edit_photo(
+        await q.reply_photo(
         photo=HELPPIC,
         caption=HELP_TEXT,
         reply_markup=HELP_BTN,
